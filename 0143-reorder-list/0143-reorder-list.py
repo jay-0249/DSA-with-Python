@@ -13,7 +13,7 @@ class Solution(object):
             return head
         #Find the middle node (odd no. of nodes) or second middle node (even no.  of nodes)
         slowPointer, fastPointer = head, head
-        while fastPointer is not None and fastPointer.next is not None:
+        while fastPointer and fastPointer.next:
             slowPointer = slowPointer.next
             fastPointer = fastPointer.next.next
 
@@ -26,8 +26,9 @@ class Solution(object):
             currentNode.next = prev
             prev = currentNode
             currentNode = nextNode
-        #Now turn the middle or second middle node as the Last node by assigning slowPointer.next with None
+        #Now detach the middle or second middle node with the second half by assigning slowPointer.next with None
         slowPointer.next = None
+        #SecondHalf pointer
         secondHalf = prev
         
         #Now start inserting Ln between L0 and L1 and continue inserting the nodes from array until the second Pointer is None
