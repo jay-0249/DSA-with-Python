@@ -6,37 +6,27 @@ class Solution(object):
         """
         """
         Reverse the vowels only by swaping characters
-        Using two pointers iterate from start and end, checking if the character at the pointers is vowel or not.
-        If yes, assign the respective Boolean to true else we should move to next character for that pointer (+=1 for start, -=1 for end)
-        At each iteration swap if both pointers are pointing to a Vowel character else continue
+        Iterate from the start until you find a vowel. Similarly iterate from the end until you find a vowel.
+        Then swap the vowels at start and end pointers
         Proceed to iterate this way until start<end
-        Booleans initial value before iteration should be False
+        This approach is optimise to remove Boolean check flags. Also use 'set' for vowels for comparing which further reduces the time O(5) to O(1) and the need to lowercase the character at each comparision  
         """
-        start = 0
-        end = len(s)-1
-        isStartVowel = False
-        isEndVowel = False
-        vowels = ['a','e','i','o','u']
+        start, end = 0, len(s)-1
+        vowels = set('aeiouAEIOU')
         #Convert string into list as 'unicode' object - string is immutable
         #Fun fact: Tuple is not a unicode object but is immutable in python
         #list(s) or s.split(), slist = [x for a,x in enumerate(s)]
         sList = [x for x in s]
         while start < end:
-            if s[start].lower() in vowels:
-                isStartVowel = True
-            else:
+            while start < end and sList[start] not in vowels:
                 start += 1
-            if s[end].lower() in vowels:
-                isEndVowel = True
-            else:
+            while start < end and sList[end] not in vowels:
                 end -= 1
-            if isStartVowel and isEndVowel:
+            if start < end:
                 temp = sList[start]
                 sList[start] = sList[end]
                 sList[end] = temp
                 start += 1
-                isStartVowel = False
                 end -= 1
-                isEndVowel = False
                 
         return ''.join(sList)
