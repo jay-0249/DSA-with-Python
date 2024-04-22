@@ -15,15 +15,14 @@ class Solution(object):
         Now move to next node, assign prevNode = currentNode,
                                       current = nextNode
         start with prevNode as None and currentNode as head continue until currentNode is None
-
         """
+        #head is directly used for memory optimisation, but using curretNode would be a safer choice
         prevNode = None
-        currentNode = head
-        while currentNode:
-            nextNode = currentNode.next
-            currentNode.next = prevNode
-            prevNode = currentNode
-            currentNode = nextNode
+        while head:
+            nextNode = head.next
+            head.next = prevNode
+            prevNode = head
+            head = nextNode
 
         return prevNode
         
