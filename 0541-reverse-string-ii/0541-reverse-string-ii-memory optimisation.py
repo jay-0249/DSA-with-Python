@@ -12,10 +12,11 @@ class Solution(object):
         i = 0
         #we cannot mutate strings
         sList = [x for x in s]  
+
         while i < len(s):
             #reverse the string for 'k' characters
             left = i
-            #Check for the last char possible to swap with the char at the left index
+                #Check for the last char possible to swap with the char at the left index
             if left+k > len(s):
                 right = len(s)-1
             else:
@@ -26,5 +27,4 @@ class Solution(object):
                 right -= 1
             #skip by 'k' charcters
             i += 2*k
-        s = "".join(sList)
-        return s
+        return "".join(sList)
