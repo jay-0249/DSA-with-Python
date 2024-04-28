@@ -22,7 +22,6 @@ class Solution(object):
             Time Complexity - O(N)
             Space complexity - O(1)
         '''
-        nodeSet = set()
 
         slowPointer, fastPointer = head, head
 
