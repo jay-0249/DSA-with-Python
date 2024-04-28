@@ -23,11 +23,13 @@ class Solution(object):
             Space complexity - O(1)
         '''
         nodeSet = set()
-        currentNode = head
-        while currentNode:
-            if currentNode in nodeSet:
+
+        slowPointer, fastPointer = head, head
+
+        while fastPointer and fastPointer.next:
+            fastPointer = fastPointer.next.next
+            slowPointer = slowPointer.next
+            if fastPointer is slowPointer:
                 return True
-            else:
-                nodeSet.add(currentNode)
-            currentNode = currentNode.next
+
         return False
