@@ -12,19 +12,22 @@ class Solution(object):
         """
         '''
         We do not have the node previous to the node to be deleted, we cannot delete this node by unlinking the node to be deleted.
-        Rather we can move the values 
+        Rather we can copy the next node val to the node to be deleted. We can skip next node in the linked list sequence
+        We do not need to move the values of all nodes - Optimisation
+        Time Complexity -> O(1)
+        Space Complexity -> O(1)
+
+        If we move the values of all nodes.
+        Time Complexity -> O(N)
+        Space Complexity -> O(1)
         '''
         currentNode = node
         #Check if the Node to the deleted is the Last Node
         if currentNode.next:
-            #If we have a node next to next to currentNode
-            while currentNode.next.next:
                 #Move the value of next node to this node
                 currentNode.val = currentNode.next.val
-                currentNode = currentNode.next
-            #Last node val to be transferred 
-            currentNode.val = currentNode.next.val
-            currentNode.next = None
+                #Skip the next node in the linked list sequence
+                currentNode.next = currentNode.next.next
 
         return
         
