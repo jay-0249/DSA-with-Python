@@ -11,12 +11,10 @@ class Solution(object):
         :rtype: void Do not return anything, modify node in-place instead.
         """
 
-        #Check if the Node to the deleted is the Last Node
-        if node.next:
-                #Move the value of next node to this node
-                node.val = node.next.val
-                #Skip the next node in the linked list sequence
-                node.next = node.next.next
+        #Move the value of next node to this node
+        node.val = node.next.val
+        #Skip the next node in the linked list sequence
+        node.next = node.next.next
 
         return
         
