@@ -15,14 +15,16 @@ class Solution(object):
         Rather we can move the values 
         '''
         currentNode = node
-        
-        while currentNode.next:
-            currentNode.val = currentNode.next.val
-            if currentNode.next.next:
+        #Check if the Node to the deleted is the Last Node
+        if currentNode.next:
+            #If we have a node next to next to currentNode
+            while currentNode.next.next:
+                #Move the value of next node to this node
+                currentNode.val = currentNode.next.val
                 currentNode = currentNode.next
-            else:
-                break
-        currentNode.next = None
+            #Last node val to be transferred 
+            currentNode.val = currentNode.next.val
+            currentNode.next = None
 
         return
         
