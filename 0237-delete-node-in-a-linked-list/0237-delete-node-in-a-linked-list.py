@@ -16,5 +16,4 @@ class Solution(object):
         #Skip the next node in the linked list sequence
         node.next = node.next.next
 
-        return
         
