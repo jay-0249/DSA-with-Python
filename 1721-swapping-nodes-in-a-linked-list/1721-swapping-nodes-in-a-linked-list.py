@@ -29,9 +29,13 @@ class Solution(object):
         while nodeIndex<k and firstPointer.next:
             firstPointer = firstPointer.next
             nodeIndex += 1
+        print(nodeIndex, k)
         #Length of the linked list is < n
-        if nodeIndex is not k:
+        if nodeIndex != k:
+            print(nodeIndex, k)
+            print("Struck in edge")
             return head
+        print("Crossed edge")
         nodeNfromBegining = firstPointer
 
         #Now let's use second pointer to reach the Nth node(from the last)
