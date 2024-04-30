@@ -19,7 +19,11 @@ class Solution(object):
         Space Complexity: O(1)
 
         Edge case if N is greater than the length of the linked list
-        NOTE: we are reach Nth node rather than N-1 or N+1 node as we just have to swap the values, for which we do not need to swap or skip ( i.e, no change of links - unlink and change links) rather just swap the values
+        NOTE: we are reach Nth node rather than N-1 or N+1 node as we just have to swap the values, for which we do not need to swap or skip 
+        ( i.e, no change of links - unlink and change links) rather just swap the values
+        NOTE: For comparing values, DON'T USE 'is' , rather use '=='
+                'is' operator checks for identity rather than equality.
+                i.e, 'is' operator checks if the two variables are pointing at the same memory
         '''
 
         firstPointer = secondPointer = head
