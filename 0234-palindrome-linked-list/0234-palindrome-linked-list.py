@@ -24,11 +24,6 @@ class Solution(object):
         '''
         if head is None or head.next is None:
             return True
-        if head.next.next is None:
-            if head.val == head.next.val:
-                return True
-            else:
-                return False
 
         slowPointer = fastPointer = head
         #Find the middle node in case of ODD number of nodes
