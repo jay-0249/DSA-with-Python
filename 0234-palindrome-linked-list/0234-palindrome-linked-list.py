@@ -32,11 +32,11 @@ class Solution(object):
             slowPointer = slowPointer.next
             fastPointer = fastPointer.next.next
         
-        middleNode = slowPointer
-        secondHalf = slowPointer.next
-        slowPointer.next = None
+        #middleNode = slowPointer
+        #secondHalf = slowPointer.next
+        #slowPointer.next = None -> not required
         prevNode = None
-        currentNode = secondHalf
+        currentNode = slowPointer.next
         #Break the second half after the middle or first middle node and Reverse the second Half
         while currentNode:
             nextNode = currentNode.next
