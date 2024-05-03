@@ -22,23 +22,42 @@ class Solution(object):
         Time Complexity -> O(N)
         Space Complexity -> O(1)
         '''
-        nodeArray = []
-        currentNode = head
-        #Push node to array
-        while currentNode:
-            nodeArray.append(currentNode.val)
-            currentNode = currentNode.next
-        
-        #Now iterate over the linked list from head and array from last
-        #See if the values match, if not it is not palindrome
-        currentNode = head
-        i = len(nodeArray)-1
-        while currentNode:
-            #Return false if the if the value at kth Node from start and end do not match
-            if currentNode.val != nodeArray[i]:
-                return False
+        if head is None or head.next is None:
+            return True
+        if head.next.next is None:
+            if head.val == head.next.val:
+                return True
             else:
-                currentNode = currentNode.next
-                i -= 1
+                return False
 
+        slowPointer = fastPointer = head
+        #Find the middle node in case of ODD number of nodes
+        #Find the first middle node in case of even number of nodes 
+        while fastPointer.next and fastPointer.next.next:
+            slowPointer = slowPointer.next
+            fastPointer = fastPointer.next.next
+        
+        middleNode = slowPointer
+        secondHalf = slowPointer.next
+        slowPointer.next = None
+        prevNode = None
+        currentNode = secondHalf
+        #Break the second half after the middle or first middle node and Reverse the second Half
+        while currentNode:
+            nextNode = currentNode.next
+            currentNode.next = prevNode
+            prevNode = currentNode
+            currentNode = nextNode
+        
+        head2 = prevNode
+        head1 = head
+        #Now iterate over the first half and second half of the linked lists and check their values match
+        while head1 and head2:
+            if head1.val == head2.val:
+                head1 = head1.next
+                head2 = head2.next
+            else:
+                return False
+        
         return True
+        
