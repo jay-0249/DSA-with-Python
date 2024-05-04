@@ -26,10 +26,5 @@ class Solution(object):
             nums1[nums1InsertAtIndex] = nums2[nums2CurrentIndex]
             nums2CurrentIndex -= 1
             nums1InsertAtIndex -= 1
-        
-        while nums1CurrentIndex>-1:
-            nums1[nums1InsertAtIndex] = nums1[nums1CurrentIndex]
-            nums1CurrentIndex -= 1
-            nums1InsertAtIndex -= 1
 
         return
