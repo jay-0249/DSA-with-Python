@@ -19,14 +19,26 @@ class Solution(object):
         Iterate over the array, store the number and it's index as key-value pair respectively in a dictionary. 
         If such a number already exists in the dictionary, check if the index of that number currently - that of the same number in the dictionary <= k
         if yes, return true
-        else update the index of the number in the dictionary with this number and continue 
+        else update the index of the number in the dictionary with this number and continue
+        Time Complexity -> O(N)
+        Space Complexity -> O(N)
+
+        3rd Approach
+        Here we have to check if we can find an element in it's next k elements.
+        We can use 'set' to store the elements of a window
+        When we slide the window, we will remove the element that was in the set before the window slides, and add the new element(that is added to the set with the window slide) to the set.
+        If we find a element that is already in the set, then we have found a element that satisfies our condition.
         '''
-        dictNumsIndex = dict()
+        if k==0:
+            return False
+        
+        setNumsWindow = set()
+
         for i in range(0, len(nums)):
-            prevIndex = dictNumsIndex.get(nums[i])
-            if prevIndex is not None and (i-prevIndex<=k):
+            if nums[i] in setNumsWindow:
                 return True
-            else:
-                dictNumsIndex[nums[i]] = i
-                
+            setNumsWindow.add(nums[i])
+            if k<len(nums) and i>k-1:
+                setNumsWindow.remove(nums[i-k])
+
         return False
