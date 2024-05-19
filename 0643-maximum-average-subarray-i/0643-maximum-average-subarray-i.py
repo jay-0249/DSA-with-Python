@@ -36,7 +36,7 @@ class Solution(object):
         #Find the average and round the average to 5 decimals
         #Adding float to the numerator is important as to avoid the divison return just a integer without the decimal part of the divison result
         
-        maxContiguousSubarrayAverage = round(float(maximumSubarraySum)/k, 5)
+        #maxContiguousSubarrayAverage = round(float(maximumSubarraySum)/k, 5)
 
-        return maxContiguousSubarrayAverage
+        return round(float(maximumSubarraySum)/k, 5)
         
