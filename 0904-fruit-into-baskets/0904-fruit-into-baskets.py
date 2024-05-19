@@ -13,6 +13,8 @@ class Solution(object):
 
         return the maximum fruits we can pick CONSECUTIVELY
         '''
+        if len(fruits) == 0:
+            return 0
         #
         fruitsInBasket = dict()
         maximumNumberOfFruitsPicked = 0
@@ -42,5 +44,8 @@ class Solution(object):
                     currentFruitsPicked += value
                 if maximumNumberOfFruitsPicked < currentFruitsPicked:
                     maximumNumberOfFruitsPicked = currentFruitsPicked
+        
+        if len(fruitsInBasket) < 2:
+            maximumNumberOfFruitsPicked = fruitsInBasket.popitem()[1]
             
         return maximumNumberOfFruitsPicked
