@@ -38,7 +38,7 @@ class Solution(object):
             if nums[i] in setNumsWindow:
                 return True
             setNumsWindow.add(nums[i])
-            if k<len(nums) and i>k-1:
+            if i>k-1:
                 setNumsWindow.remove(nums[i-k])
 
         return False
