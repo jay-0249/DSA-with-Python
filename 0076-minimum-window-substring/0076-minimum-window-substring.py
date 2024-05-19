@@ -23,7 +23,8 @@ class Solution(object):
         #create a dictionary of elements in string 't' and their respective frequency
         dictTelements = dict()
         for ele in t:
-            if dictTelements.get(ele):
+            #if dictTelements.get(ele):    it is better to use 'in operator' bcz if dictTelements.get(ele) fails when get() returns '0'. Eventhough is not a possibility in our case, better to follow 'in' operator
+            if ele in dictTelements:
                 dictTelements[ele] = dictTelements[ele]+1 
             else:
                 dictTelements[ele] = 1
@@ -34,15 +35,17 @@ class Solution(object):
 
         #Until the end pointer is in bounds of string 's'
         while end < len(s):
-            #as we do not have scenario that string 't' can be an empty string, we do not check if the counter is zero first rather we can check if the current character is a character that is in 't'
+            #as we do not have scenario that string 't' can be an empty string, we do not check if the counter is zero prior initially rather we can check if the current character is a character that is in 't'
             currentChar = s[end]
             #check if this char is still required to make it a substring that contains all characters of string 't'
             if dictTelements.get(currentChar) > 0:
                 counterS -= 1
             #check if this char is in dictionary
+                #there can be a case where we can the frequency of currentChar (in dictionary) is zero or less than zero, which means we do not require that character to make the substring of 's' a required substring. But we still have to account for that element for sliding window(if that element is present as an element of string 't') and thereby decrease the frequency of the element. so check if this char is in dictionary
             if currentChar in dictTelements:
                 dictTelements[currentChar] = dictTelements[currentChar] - 1
-            
+
+            #Increase the window right end by moving the right end to the next character
             end += 1
 
             #Check if the substring between pointers 'begin' and 'end' contains all elements of 't'
