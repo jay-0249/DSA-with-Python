@@ -9,7 +9,7 @@ class Solution(object):
 
         for i in strs:
             sortedStr = ''.join(sorted(i))
-            if sortedStr in resultDict.keys():
+            if sortedStr in resultDict:
                 resultDict[sortedStr].append(i)
             else:
                 resultDict[sortedStr] = [i]
