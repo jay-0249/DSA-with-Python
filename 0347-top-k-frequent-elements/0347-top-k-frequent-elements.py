@@ -8,18 +8,20 @@ class Solution(object):
         :rtype: List[int]
         """
         
-        countNum = {}
-
+        #create a hashmap of unique numbers occuring in the list and their frequency
+        freqMap = {}
         for i in nums:
-            countNum[i] = 1 + countNum.get(i,0)
+            currFreq = freqMap.get(i,0)
+            freqMap[i] = 1 + currFreq
         
-        numListWithFreq = [(-freq, num) for num,freq in countNum.items()]
-
-        heapq.heapify(numListWithFreq)
-
-        result = [heapq.heappop(numListWithFreq)[1] for _ in range(k)]
-        # for i in range(0,k):
-        #     result[i] = heapq.heappop(numListWithFreq)[1] 
+        #We need a data structure to sort the frequencies faster and also access the top k frequent elements
+        tupleList = [(freq,val) for val,freq in freqMap.items()]
         
+        #Transform the list of tuples as heap
+        heapq.heapify(tupleList)
+        
+        #Extract the top k frequent elements
+        result = [val for fre,val in heapq.nlargest(k,tupleList)]
+
         return result
-
+    
