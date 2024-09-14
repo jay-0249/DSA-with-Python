@@ -13,9 +13,13 @@ class Solution(object):
         for i in nums:
             countNum[i] = 1 + countNum.get(i,0)
         
-        numListWithFreq = [(freq, num) for num,freq in countNum.items()]
+        numListWithFreq = [(-freq, num) for num,freq in countNum.items()]
 
-        result = [num for freq, num in heapq.nlargest(k, numListWithFreq)]
+        heapq.heapify(numListWithFreq)
+
+        result = [heapq.heappop(numListWithFreq)[1] for _ in range(k)]
+        # for i in range(0,k):
+        #     result[i] = heapq.heappop(numListWithFreq)[1] 
         
         return result
 
