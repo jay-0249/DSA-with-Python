@@ -4,18 +4,20 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        productArr = [1]*len(nums)
-
-        prefixProduct = 1
-
-        for i in range(1,len(nums)):
-            prefixProduct *= nums[i-1]
-            productArr[i] = prefixProduct
+        '''
+        Iterate over the array, at each iteration use a increment prefix product starting from index 1
+        similarly iterate from lastr but one element of the array in the similar approach of incremental product to calculate postfix product
+        '''
+        prefix_product = 1
+        product = [1]*len(nums)
         
-        postfixProduct = 1
+        for i in range(0,len(nums)-1):
+            prefix_product *= nums[i]
+            product[i+1] = prefix_product
 
+        postfix_product = 1
         for i in range(len(nums)-2,-1,-1):
-            postfixProduct *= nums[i+1]
-            productArr[i] *= postfixProduct
+            postfix_product *= nums[i+1]
+            product[i] *= postfix_product
 
-        return productArr 
+        return product 
