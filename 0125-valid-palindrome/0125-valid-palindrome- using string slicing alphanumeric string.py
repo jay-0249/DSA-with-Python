@@ -12,6 +12,6 @@ class Solution(object):
                 alpha_numeric_string += i.lower()
         
         #verify if the alphanumeric string is a palindrome using string slicing
-        return alpha_numeric_string[::1] == alpha_numeric_string[::-1]
+        return alpha_numeric_string == alpha_numeric_string[::-1]
 
         
