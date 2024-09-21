@@ -4,24 +4,21 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        '''
-        Iterate over the string from both ends to see if the characters at left and right index are alphanumeric and if they are alphanumeric, then check if they match else return false
-        '''
-        s = s.lower()
-        left_pointer = 0
-        right_pointer = len(s) - 1
 
-        while left_pointer < right_pointer:
-            if s[left_pointer].isalnum() and s[right_pointer].isalnum() and s[left_pointer] != s[right_pointer]:
-                print (left_pointer, right_pointer)
-                return False
-            elif not s[left_pointer].isalnum():
-                left_pointer += 1
-            elif not s[right_pointer].isalnum():
-                right_pointer -= 1
+        '''Iterating over to check if it is a palindrome'''
+        i = 0
+        j = len(s)-1
+        while i<j:
+            if not s[i].isalnum():
+                i+=1
+            elif not s[j].isalnum():
+                j-=1
+            elif s[i].lower() == s[j].lower():
+                i += 1
+                j -= 1
             else:
-                left_pointer += 1
-                right_pointer -= 1
-
+                return False
+        
+        '''If it is not a palindrome, it will be caught in the 'else' condition. Therefore the string is a palindrome, iteration will be succesful without getting caught with the 'else' '''
         return True
         
