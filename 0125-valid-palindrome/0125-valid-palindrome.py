@@ -4,21 +4,14 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-
-        '''Iterating over to check if it is a palindrome'''
-        i = 0
-        j = len(s)-1
-        while i<j:
-            if not s[i].isalnum():
-                i+=1
-            elif not s[j].isalnum():
-                j-=1
-            elif s[i].lower() == s[j].lower():
-                i += 1
-                j -= 1
-            else:
-                return False
         
-        '''If it is not a palindrome, it will be caught in the 'else' condition. Therefore the string is a palindrome, iteration will be succesful without getting caught with the 'else' '''
-        return True
+        #convert the string into lowercase alphanumeric string
+        alpha_numeric_string = ""
+        for i in s:
+            if i.isalnum():
+                alpha_numeric_string += i.lower()
+        
+        #verify if the alphanumeric string is a palindrome using string slicing
+        return alpha_numeric_string[::1] == alpha_numeric_string[::-1]
+
         
