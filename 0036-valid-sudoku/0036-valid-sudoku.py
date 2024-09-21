@@ -8,6 +8,9 @@ class Solution(object):
         Iterate over the rows, store the unique numbers in a set, at each iteration if you find a a number duplicate then return as invalid Sudoko
         Similarly iterate over the columns, and check the validity in the same way
         Similarly iterate over each of the 9 squares and check for the validity in the same way
+
+        Time Complexity - O(N^2) here N is either the number of rows or columns
+        Space Complexity - O(N) to store the set of elements in a row or column or square 
         '''
         #check rows
         for i in range(0,9):
