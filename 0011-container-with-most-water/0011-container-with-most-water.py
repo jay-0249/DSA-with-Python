@@ -5,27 +5,31 @@ class Solution(object):
         :rtype: int
         """
         '''
-        Let's use two pointers to indicate two walls
-        Let's go with greedy approach to find the max area, i.e, at an iteration after checking if the area between the walls with maximum area we had before, of the two walls we continue with the wall with more height while we move to the next wall that is next to the smaller wall
-        Each starting this iteration over the array, we will fetch the maximum height of the wall. At each iteration we will check the maximum area vs an area of between walls as if the walls of the maximum height.
-        If maximum area we have visited > maximum wall height * (left wall index - right wall index), then there is no chance that we will find an area greater to max area. It is because the maximum height of all walls is same always and the difference between left and right walls index keep shrinking. So it is better to break and return the maximum area
-        This way we will iterate over the array
-        '''
-        ep1 = 0
-        ep2 = len(height)-1
-        def area(p1,p2):
-            return (p2-p1)*(min(height[p1],height[p2]))
-        maxArea = 0
-        maxHeightOfAllWalls = max(height)
-        while ep1 < ep2:
-            currentArea = area(ep1, ep2)
-            if maxArea<currentArea:
-                maxArea = currentArea
-                if maxHeightOfAllWalls*(ep2-ep1) < currentArea:
-                    return maxArea     
-            if height[ep1]<height[ep2]:
-                ep1 += 1
-            else:
-                ep2 -= 1
-        return maxArea
+        Bruteforce Approach - nested loop
+            Iterate over the array, for each iteration fix that number as the first wall and then iterate over the rest of array to find a wall that can be the second wall, such that the volume is maximised. In each iteration, update the maximum volume of the container.
+            Time Complexity - O(N^2)
+            Space Complexity - O(1)
         
+        maxVolume = 0    
+        for i in range(0,len(height)-1):
+            for j in range(i+1,len(height)):
+                currentVolume = abs((j-i)*(min(height[j],height[i])))
+                maxVolume = max(maxVolume, currentVolume)
+        return maxVolume 
+
+        Greedy Approach - Two Pointers
+        The basic underlying idea is that at each point of time, I want to to move to a bigger container possible locally.
+        First using two pointers from left and right side of the array. Now that you have a container, check if the volume is greater than max volume, if not update it.
+        Then, the wall that is the smaller wall, move to another wall
+        '''
+        maxVolume = 0
+        l, r = 0,len(height)-1
+        while l < r:
+            currentVolume = abs((r-l)*(min(height[l],height[r])))
+            maxVolume = max(maxVolume, currentVolume)
+            if height[l] < height[r]:
+                l += 1
+            else:
+                r -= 1
+        
+        return maxVolume
