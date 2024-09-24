@@ -25,11 +25,11 @@ class Solution(object):
         maxVolume = 0
         l, r = 0,len(height)-1
         while l < r:
-            currentVolume = (r-l)*(min(height[l],height[r]))
-            maxVolume = max(maxVolume, currentVolume)
-            if height[l] > height[r]:
-                r -= 1
-            else:
+            if height[l] < height[r]:
+                maxVolume = max(maxVolume, height[l]*(r-l))
                 l += 1
+            else:
+                maxVolume = max(maxVolume, height[r]*(r-l))
+                r -= 1
         
         return maxVolume
