@@ -27,9 +27,9 @@ class Solution(object):
         while l < r:
             currentVolume = (r-l)*(min(height[l],height[r]))
             maxVolume = max(maxVolume, currentVolume)
-            if height[l] < height[r]:
-                l += 1
-            else:
+            if height[l] > height[r]:
                 r -= 1
+            else:
+                l += 1
         
         return maxVolume
