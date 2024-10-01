@@ -6,51 +6,34 @@ class Solution(object):
         :rtype: int
         """
         '''
-        Approach
-        Use sliding approach as we have to find a substring, slide over the string
-        Iterate over the string with start and current positions
-        keep track of the repititions of the char that repeated most in the substring between start and current position
-        If the difference between maximum repititions of a char that repeats most in the substring and the length of the substring, is greater than k, then decrement start by one.
-        This is because, we can atmost replace k characters in a substring
-
-        Time Complexity - O(N)
-        Space Complexity - O(1)
+        find longest substring
+        sliding window with variable length
+        start, current pointers
+        as len(s) = 1,
+        in the worst case answer, the longest substring can be of length 1
+        similarly freq_max_repeated_char can be 1 in the worst case
+        At each point, we see the frequency of the current character, increment the character count, if it is greater than maximum frequency, we will update the maximum frequency
+        If length - maximum frequency is greater than k, then we have a case where we might need more than k replacements
+        so increment the start pointer, decrement the start element frequency
+        this way our substring is always in compliance with the maximum k repititions rule
+        we do not need to worry about the freq_max_repeated_char, as if we find a case when we have a greater frequency, we will update freq_max_repeated_char
+        also in each iteration we will check if we have found a longer string and update accordingly
         '''
 
-
-        # count = {}
-        
-        # l = 0
-        # maxf = 0
-        # for r in range(len(s)):
-        #     count[s[r]] = 1 + count.get(s[r], 0)
-        #     maxf = max(maxf, count[s[r]])
-
-        #     if (r - l + 1) - maxf > k:
-        #         count[s[l]] -= 1
-        #         l += 1
-
-        # return (len(s) - l)
-
-
-        #initialise start position
+        length_longest_string = 0
         start = 0
 
-        #initialise iteration variable to keep track of frequency of the character that repeats most
-        frequency_most_repeated_char = 0
-        char_frequency_dictionary = dict()
+        freq_max_repeated_char = 0
+        freq_dict = {}
 
+        for current in range(0,len(s)):
+            freq_dict[s[current]] = 1 + freq_dict.get(s[current], 0)
+            freq_max_repeated_char = max(freq_max_repeated_char, freq_dict[s[current]])
 
-        for current_position in range(len(s)):
-            #update the frequency with the current character
-            char_frequency_dictionary[s[current_position]] = 1 + char_frequency_dictionary.get(s[current_position],0)
-
-            #update the frequency of the char most repeated
-            frequency_most_repeated_char = max(frequency_most_repeated_char, char_frequency_dictionary[s[current_position]])
-
-            #check if we need to replace more than k characters in this substring so that the substring contains same character
-            if (current_position - start+1) - frequency_most_repeated_char > k:
-                char_frequency_dictionary[s[start]] = char_frequency_dictionary[s[start]] - 1
+            if ((current-start+1) - freq_max_repeated_char) > k:
+                freq_dict[s[start]] -= 1
                 start += 1
-            
-        return len(s)-start
+
+            length_longest_substring = max(current-start+1, length_longest_string)
+        
+        return length_longest_substring
