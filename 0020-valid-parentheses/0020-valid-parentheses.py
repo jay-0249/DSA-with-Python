@@ -4,33 +4,29 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        tempStack = []
-        isValid = True
+        '''
+        Using stack to check if a parenthesis order is correct. Stack follows LIFO (Last In First Out) which resembles the parenthesis order matching procedure.
 
-        def isValidClosingBracket(closedB):
-            openB = tempStack.pop()
-            if openB == '(' and closedB == ')':
-                return True
-            elif openB == '{'and closedB == '}':
-                return True
-            elif openB == '[' and closedB == ']':
-                return True
+        Use dictionary to store 
+        '''
+        temp_stack = []
+        is_valid = True
+
+        matching_dictionary = { "(":")","{":"}","[":"]"}
+
+        for i in s:
+            if i in matching_dictionary:
+                temp_stack.append(i)
+            elif len(temp_stack)>0 and matching_dictionary[temp_stack[-1]] == i:
+                temp_stack.pop()
             else:
-                return False
+                is_valid = False
+                return is_valid
+        
+        if len(temp_stack) == 0:
+            is_valid = True
+        else:
+            is_valid = False
 
-        for b in s:
-            if b=='(' or b=='{' or b=='[': #push opening brackets to stack
-                tempStack.append(b)
-            elif len(tempStack)==0: #if the stack is empty and we find a closing bracket
-                isValid = False
-                break
-            elif not isValidClosingBracket(b):
-                isValid = False
-                break
-
-        #Checking if we have any the opening brackets for those couln't found a matching bracket
-        if len(tempStack) != 0:
-            isValid = False
-
-        return isValid  
+        return is_valid
         
