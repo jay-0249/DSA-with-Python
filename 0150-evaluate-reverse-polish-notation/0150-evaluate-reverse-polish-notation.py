@@ -4,13 +4,6 @@ class Solution(object):
         :type tokens: List[str]
         :rtype: int
         """
-        def is_token_int(token):
-            is_int = True
-            try:
-                result = int(token)
-            except ValueError:
-                is_int = False
-            return is_int
 
         operators = {"+","-","*","/"}
         stack = []
@@ -29,13 +22,7 @@ class Solution(object):
                 else:
                     quotient = math.trunc(float(op1)/op2)
                     stack.append(quotient)
-            elif is_token_int(token):
-                stack.append(int(token))
             else:
-                return -1
+                stack.append(int(token))
         
-        
-        if not stack:
-            return 0
-        else:
-            return stack[0]
+        return stack[0]
