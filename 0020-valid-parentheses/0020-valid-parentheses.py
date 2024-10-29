@@ -5,28 +5,41 @@ class Solution(object):
         :rtype: bool
         """
         '''
-        Using stack to check if a parenthesis order is correct. Stack follows LIFO (Last In First Out) which resembles the parenthesis order matching procedure.
+        Using array to store open brackets and and a variable to track the length of the array.
+        Iterate over the loop, if we find a closing bracket, check if the previous opening bracket is suitable for this closing bracket, if yes pop the opening bracket else it is a invalid string. This way we ensure "Every close bracket has a corresponding open bracket of the same type" and "Open brackets must be closed in the correct order"
+        After iteration let's check if the array is empty or not. If yes, it is true that "Open brackets must be closed by the same type of brackets"
 
-        Use dictionary to store 
+        Time Complexity: O(N)
+            Traversing the array - O(N)
+            Inserting or Deleting an elements from the array - O(1) on an average
+            Inserting or Deleting atmost half of chars of s from the array- O(N) on an average
+        
+        Space Complexity: O(N)
+            bracketDict - O(1)
+            lengthArray - O(1)
+            Inserting or Deleting an elements from the array - O(1)
+            Inserting or Deleting atmost half of chars of s from the array- O(N)
         '''
-        temp_stack = []
-        is_valid = True
+        isValid = True
+        bracketDict = {")":"(", "}":"{", "]":"["}
+        bracketArray = []
+        lengthArray = 0
 
-        matching_dictionary = { "(":")","{":"}","[":"]"}
-
-        for i in s:
-            if i in matching_dictionary:
-                temp_stack.append(i)
-            elif len(temp_stack)>0 and matching_dictionary[temp_stack[-1]] == i:
-                temp_stack.pop()
+        for b in s:
+            if b in bracketDict:
+                if bracketArray and lengthArray > 0:
+                    if bracketDict[b] == bracketArray[lengthArray-1]:
+                        bracketArray.pop()
+                        lengthArray -= 1
+                    else:
+                        return False
+                else:
+                    return False
             else:
-                is_valid = False
-                return is_valid
-        
-        if len(temp_stack) == 0:
-            is_valid = True
-        else:
-            is_valid = False
+                bracketArray.append(b)
+                lengthArray += 1
 
-        return is_valid
-        
+        if lengthArray == 0:
+            return True
+        else:
+            return False
