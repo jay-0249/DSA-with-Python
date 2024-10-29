@@ -27,12 +27,9 @@ class Solution(object):
 
         for b in s:
             if b in bracketDict:
-                if bracketArray and lengthArray > 0:
-                    if bracketDict[b] == bracketArray[lengthArray-1]:
-                        bracketArray.pop()
-                        lengthArray -= 1
-                    else:
-                        return False
+                if lengthArray > 0 and bracketArray and bracketDict[b] == bracketArray[lengthArray-1]:
+                    bracketArray.pop()
+                    lengthArray -= 1
                 else:
                     return False
             else:
