@@ -1,32 +1,26 @@
-from collections import deque
-import math
 class Solution(object):
     def evalRPN(self, tokens):
         """
         :type tokens: List[str]
         :rtype: int
         """
-        operationsDict = {"+","-","*","/"}
-        stack = deque()
 
-        for t in tokens:
-            if t in operationsDict:
-                secondOperand = stack.pop()
-                firstOperand  = stack.pop()
-                
-                if t=="+":
-                    result = firstOperand + secondOperand
-                elif t=="-":
-                    result = firstOperand - secondOperand
-                elif t=="*":
-                    result = firstOperand*secondOperand
+        operators = {"+","-","*","/"}
+        stack = []
+        for i, token in enumerate(tokens):
+            if token in operators:
+                op2 = stack.pop()
+                op1 = stack.pop()
+                if token == "+":
+                    stack.append(op1+op2)
+                elif token == "-":
+                    stack.append(op1-op2)
+                elif token == "*":
+                    stack.append(op1*op2)
                 else:
-                    result = int(round(firstOperand/secondOperand,0))
-                    if result<0 and firstOperand != result*secondOperand:
-                        result += 1
-                stack.append(result)
+                    quotient = math.trunc(float(op1)/op2)
+                    stack.append(quotient)
             else:
-                stack.append(int(t))
-
-        return stack.pop()
+                stack.append(int(token))
         
+        return stack[0]
