@@ -6,43 +6,18 @@ class Solution(object):
         :type speed: List[int]
         :rtype: int
         """
-        speedDict = {position[i]:speed[i] for i in range(0, len(position))}
-        position.sort(reverse = True)
-        #print(speedDict)
-        #print(position)
-        fleetCount = 0
-        i = 0
+        # Pair each car's position with its speed and sort by position descending
+        cars = sorted(zip(position, speed), reverse=True)
+        stack = []
         
-        while i < len(position):
-            currentCar = position[i]
-            #print(currentCar)
-            currentSpeed = speedDict[currentCar]
-            if currentSpeed == 0:
-                if currentCar == target:
-                    fleetCount += 1
-                return fleetCount
-            currentTime = float((target-currentCar))/currentSpeed
-            j = i+1
-            while j < len(position):
-                nextCar = position[j]
-                nextSpeed = speedDict[nextCar]
-                if nextSpeed != 0:
-                    nextTime = float((target-nextCar))/nextSpeed
-                    #print("currentTime", currentTime)
-                    #print("nextTime", nextTime)
-                    if currentTime >= nextTime:
-                        j += 1
-                    else:
-                        break
-                else:
-                    break
-            #print(j)
-            fleetCount += 1
-            i = j
+        for pos, spd in cars:
+            # Calculate time for this car to reach the target without handling zero speed
+            time = float(target - pos) / spd
+            
+            # If the stack is empty or the current car takes longer than the last car in stack
+            if not stack or time > stack[-1]:
+                stack.append(time)
         
-        return fleetCount
-            
-            
-
-                
-                
+        # The number of elements in the stack represents the number of fleets
+        return len(stack)
+        
