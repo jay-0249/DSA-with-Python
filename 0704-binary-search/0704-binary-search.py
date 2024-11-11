@@ -5,16 +5,19 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        l, r = 0, len(nums)-1
+        '''
+        The list is sorted. So rather than searching linearly we can search the ends and the middle element and narrow down similarly. This reduces our time to find the element from O(N) to O(logN)
+        Time Complexity - O(logN)
+        Space Complexity - O(1)
+        '''
+        l,r = 0, len(nums)-1
 
         while l<=r:
-            mid = l+(r-l)/2
-            if target == nums[mid]:
+            mid = l+(r-l)//2
+            if nums[mid] == target:
                 return mid
-            elif target < nums[mid]:
-                r = mid-1
+            elif nums[mid] > target:
+                r = mid - 1
             else:
-                l = mid+1
-
+                l = mid + 1
         return -1
-        
