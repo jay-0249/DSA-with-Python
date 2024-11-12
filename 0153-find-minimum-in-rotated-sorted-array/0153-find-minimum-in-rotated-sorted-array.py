@@ -19,13 +19,13 @@ class Solution(object):
         l, r = 0, len(nums)-1
         while l<=r:
             mid = l + (r-l)//2
-            print(l,r)
+
             if nums[mid] > minElement:
                 l = mid+1
             else:
                 minElement = nums[mid]
                 r = mid-1
-        print(l,r)
+
         minElement = min(nums[l], minElement, nums[r])
         
         return minElement
