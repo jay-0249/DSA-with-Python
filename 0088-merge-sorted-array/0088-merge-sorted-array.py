@@ -7,24 +7,16 @@ class Solution(object):
         :type n: int
         :rtype: None Do not return anything, modify nums1 in-place instead.
         """
-        
-        nums1CurrentIndex = m-1
-        nums2CurrentIndex = n-1
-        nums1InsertAtIndex = n+m-1
-        
-        while nums2CurrentIndex>-1 and nums1CurrentIndex>-1:
-            if nums2[nums2CurrentIndex]>nums1[nums1CurrentIndex]:
-                nums1[nums1InsertAtIndex] = nums2[nums2CurrentIndex]
-                nums2CurrentIndex -= 1
-                nums1InsertAtIndex -= 1
-            else:
-                nums1[nums1InsertAtIndex] = nums1[nums1CurrentIndex]
-                nums1CurrentIndex -= 1
-                nums1InsertAtIndex -= 1
-        
-        while nums2CurrentIndex>-1:
-            nums1[nums1InsertAtIndex] = nums2[nums2CurrentIndex]
-            nums2CurrentIndex -= 1
-            nums1InsertAtIndex -= 1
+        b = n-1
+        a = m-1
+        k = m+n-1
 
-        return
+        while b>-1:
+            if nums2[b] >= nums1[a]:
+                nums1[k] = nums2[b]
+                b -= 1 
+            else:
+                nums1[k] = nums1[a]
+                a -= 1
+            k -= 1
+        return 
