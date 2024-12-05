@@ -17,8 +17,9 @@ class Solution(object):
         start with prevNode as None and currentNode as head continue until currentNode is None
 
         """
-        prevNode = None
-        currentNode = head
+        
+        prevNode, currentNode = None, head
+        
         while currentNode:
             nextNode = currentNode.next
             currentNode.next = prevNode
