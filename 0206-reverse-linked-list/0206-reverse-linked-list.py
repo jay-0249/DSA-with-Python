@@ -6,23 +6,30 @@
 class Solution(object):
     def reverseList(self, head):
         """
-        :type head: ListNode
-        :rtype: ListNode
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
         """
-        """
-        prev -> current -> next
-        prev <- current, next
-        Now move to next node, assign prevNode = currentNode,
-                                      current = nextNode
-        start with prevNode as None and currentNode as head continue until currentNode is None
-        """
-        #head is directly used for memory optimisation, but using curretNode would be a safer choice
+        #EdgeCases
+        if head == None:
+            return head
+        
+        #Base Condition
         prevNode = None
-        while head:
-            nextNode = head.next
-            head.next = prevNode
-            prevNode = head
-            head = nextNode
+        currNode = head
+        nextNode = currNode.next
 
-        return prevNode
+        #first node reversal
+        currNode.next = prevNode
+
+        #Recursive until your nextNode is None
+        while nextNode:
+            #move current node to next node, accordingly nextNode and prevNode are moved
+            prevNode = currNode
+            currNode = nextNode
+            nextNode = nextNode.next
+            #Link the currNode's next node to prevNode
+            currNode.next = prevNode
+        
+        return currNode
+
         
