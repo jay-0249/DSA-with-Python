@@ -21,7 +21,7 @@ class Solution(object):
         #first node reversal
         currNode.next = prevNode
 
-        #Recursive until your nextNode is None
+        #Iterative approach until your nextNode is None
         while nextNode:
             #move current node to next node, accordingly nextNode and prevNode are moved
             prevNode = currNode
