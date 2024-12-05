@@ -6,23 +6,18 @@
 class Solution(object):
     def reverseList(self, head):
         """
-        :type head: ListNode
-        :rtype: ListNode
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
         """
-        """
-        prev -> current -> next
-        prev <- current, next
-        Now move to next node, assign prevNode = currentNode,
-                                      current = nextNode
-        start with prevNode as None and currentNode as head continue until currentNode is None
-        """
-        #head is directly used for memory optimisation, but using curretNode would be a safer choice
-        prevNode = None
-        while head:
-            nextNode = head.next
-            head.next = prevNode
-            prevNode = head
-            head = nextNode
+        #Base Condition
+        prevNode, currNode = None, head
 
-        return prevNode
+        #Iteratively reverse the current node's next pointer to previous node
+        while currNode:
+            nextNode = currNode.next   #store next node
+            currNode.next = prevNode   #point the link of next node to prev node 
+            prevNode = currNode        #shift prev node
+            currNode = nextNode        #shift curr node
         
+        #return the last node as head
+        return prevNode
