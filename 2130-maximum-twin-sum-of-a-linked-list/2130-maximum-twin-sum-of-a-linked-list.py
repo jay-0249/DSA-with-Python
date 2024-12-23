@@ -9,38 +9,22 @@ class Solution(object):
         :type head: Optional[ListNode]
         :rtype: int
         """
-        '''
-        We always have even number of nodes
-        Reverse the nodes until first middle node including the first middle node. So we have to combine both finding the first middle node and revsering the nodes
-        Then iterate over the both halfs of the linked list to find the maximum sum of twin nodes
-        Time Complexity -> O(N)
-        Space Complexity -> O(1)
-        '''
-        if head is None:
-            return 0
-
-        slowPointer = fastPointer = head
-        prevNode = None
-        #Reverse the nodes till first middle node, including the first middle node
-        while fastPointer and fastPointer.next:
+        #store the first half of the linked list into a list
+        firstNNodes = list()
+        slowPointer, fastPointer = head, head
+        # fast pointer will always be on a node with index of even number, as we have even number of nodes, fast pointer can always directly check if it has a node on next even number index
+        while fastPointer:
+            firstNNodes.append(slowPointer.val)
+            slowPointer = slowPointer.next
             fastPointer = fastPointer.next.next
-            nextNode = slowPointer.next
-            slowPointer.next = prevNode
-            prevNode = slowPointer
-            slowPointer = nextNode
+
+        #then we can have the slow pointer on the second half of the linked list and a pointer on the list from the end to iterate and find the twin sum
+        #we can maintain a variable to store the maximum twin sum
+        max_twin_sum = 0
+        for i in range(1,len(firstNNodes)+1):
+            curr_twin_sum = slowPointer.val + firstNNodes[-i]
+            if max_twin_sum < curr_twin_sum:
+                max_twin_sum = curr_twin_sum
+            slowPointer = slowPointer.next
         
-        head1 = prevNode
-        head2 = slowPointer
-
-        maxTwinNodeSum = head1.val + head2.val
-        #Iterate over both halfs of Linked lists to find the maximum twin node sum
-        while head1 and head2:
-            currentTwinNodeSum = head1.val + head2.val
-            if currentTwinNodeSum > maxTwinNodeSum :
-                maxTwinNodeSum = currentTwinNodeSum
-            head1 = head1.next
-            head2 = head2.next
-        
-        return maxTwinNodeSum
-
-
+        return max_twin_sum
