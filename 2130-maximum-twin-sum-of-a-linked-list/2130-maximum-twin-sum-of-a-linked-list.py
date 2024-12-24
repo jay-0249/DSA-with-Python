@@ -1,3 +1,4 @@
+from collections import deque
 # Definition for singly-linked list.
 # class ListNode(object):
 #     def __init__(self, val=0, next=None):
@@ -9,22 +10,26 @@ class Solution(object):
         :type head: Optional[ListNode]
         :rtype: int
         """
-        #store the first half of the linked list into a list
-        firstNNodes = list()
+        #we can use stack to store the first half of the node values
+        #we can use slow and fast pointer technique to find the middle node
         slowPointer, fastPointer = head, head
-        # fast pointer will always be on a node with index of even number, as we have even number of nodes, fast pointer can always directly check if it has a node on next even number index
+        firstNNodes = deque()
+        
         while fastPointer:
+            #store the first N node values
             firstNNodes.append(slowPointer.val)
             slowPointer = slowPointer.next
-            fastPointer = fastPointer.next.next
+            fastPointer = fastPointer.next.next #we are directly going for next to next node without chceking because the constraints state that the linked list is of even length
 
-        #then we can have the slow pointer on the second half of the linked list and a pointer on the list from the end to iterate and find the twin sum
-        #we can maintain a variable to store the maximum twin sum
+        #then we can iterate over the second half of the linked list
+        #use a global variable to store the maximum twin sum
         max_twin_sum = 0
-        for i in range(1,len(firstNNodes)+1):
-            curr_twin_sum = slowPointer.val + firstNNodes[-i]
-            if max_twin_sum < curr_twin_sum:
-                max_twin_sum = curr_twin_sum
+        while slowPointer:
+        #to find the twin sum for each of the node
+            twin_sum = slowPointer.val + firstNNodes.pop()
+            if max_twin_sum < twin_sum:
+                max_twin_sum = twin_sum
             slowPointer = slowPointer.next
         
         return max_twin_sum
+        
