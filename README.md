@@ -13,3 +13,19 @@ You can reach also me on Linkedin at Jayadeep Nukala (https://www.linkedin.com/i
 I am pursuing a master's in Information Technology and Management at The University of Texas at Dallas. I am currently looking for Software developer opportunities. 
 
 I have created this repository using a Chrome extension [LeetHub v3](https://github.com/raphaelheinz/LeetHub-3.0)
+
+<!---LeetCode Topics Start-->
+# LeetCode Topics
+## Hash Table
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0003-longest-substring-without-repeating-characters](https://github.com/jay-0249/DSA-with-Python/tree/main/0003-longest-substring-without-repeating-characters/) | Medium |
+## String
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0003-longest-substring-without-repeating-characters](https://github.com/jay-0249/DSA-with-Python/tree/main/0003-longest-substring-without-repeating-characters/) | Medium |
+## Sliding Window
+| Problem Name | Difficulty |
+| ------- | ------- |
+| [0003-longest-substring-without-repeating-characters](https://github.com/jay-0249/DSA-with-Python/tree/main/0003-longest-substring-without-repeating-characters/) | Medium |
+<!---LeetCode Topics End-->
